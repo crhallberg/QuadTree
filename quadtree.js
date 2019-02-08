@@ -216,6 +216,9 @@ class QuadTree {
     if (typeof count === "undefined") {
       count = 1;
     }
+    if (typeof startingSize === "undefined") {
+      startingSize = 1;
+    }
 
     if (!this.divided) {
       // Empty
@@ -230,7 +233,7 @@ class QuadTree {
 
     // optimized, expanding binary search
     // start with a small circle, rapidly expand, slowly shrink
-    let radius = 1;
+    let radius = startingSize;
     let limit = 16;
     while (true) {
       const range = new Circle(point.x, point.y, radius);
