@@ -365,9 +365,8 @@ describe('QuadTree', () => {
     it('throws exception when JSON has no position data', () => {
       expect(() => { new QuadTree.fromJSON({ points: [] }) }).to.throw(TypeError);
     });
-    it('saves all data to a string', () => {
-      const json = quadtree.toJSON();
-      const obj = JSON.parse(json);
+    it('saves all data to a JSON object', () => {
+      const obj = quadtree.toJSON();
       expect(obj.x).to.equal(quadtree.boundary.x);
       expect(obj.y).to.equal(quadtree.boundary.y);
       expect(obj.w).to.equal(quadtree.boundary.w);
@@ -375,13 +374,12 @@ describe('QuadTree', () => {
       expect(obj.capacity).to.equal(quadtree.capacity);
       expect(obj.ne.points.length).to.equal(quadtree.northeast.points.length);
       expect(obj.ne.points[0].userData.index).to.equal(quadtree.northeast.points[0].userData.index);
-      expect(obj.nw.divided).to.be.undefined;
-      expect(obj.se.x).to.be.undefined;
-      expect(obj.sw.y).to.be.undefined;
+      expect(obj.ne.divided).to.be.undefined;
+      expect(obj.nw).to.be.undefined;
     });
-    it('loads properly from a string', () => {
-      const json = quadtree.toJSON();
-      const test = QuadTree.fromJSON(JSON.parse(json));
+    it('loads properly from a JSON object', () => {
+      const obj = quadtree.toJSON();
+      const test = QuadTree.fromJSON(obj);
       expect(test.boundary.x).to.equal(quadtree.boundary.x);
       expect(test.boundary.y).to.equal(quadtree.boundary.y);
       expect(test.boundary.w).to.equal(quadtree.boundary.w);
