@@ -95,15 +95,15 @@ function showGrid(qtree) {
 }
 
 function showPoints(qtree) {
+    for (let p of qtree.points) {
+        stroke(255);
+        point(p.x * SCALE, p.y * SCALE);
+    }
+
     if (qtree.divided) {
         showPoints(qtree.northeast);
         showPoints(qtree.northwest);
         showPoints(qtree.southeast);
         showPoints(qtree.southwest);
-    } else {
-        for (let p of qtree.points) {
-            stroke(255);
-            point(p.x * SCALE, p.y * SCALE);
-        }
     }
 }
